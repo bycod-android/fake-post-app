@@ -17,8 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.core.context.startKoin
-import org.koin.dsl.koinApplication
+import org.koin.core.Koin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 
 interface Posts {
@@ -34,11 +35,11 @@ class PostsComponent(
     override val uiState: Value<PostsUiState>
         get() = viewModel.state
 
-    class PostsViewModel() : InstanceKeeper.Instance {
+
+    class PostsViewModel() : InstanceKeeper.Instance, KoinComponent {
         private val _state = MutableValue(PostsUiState())
         val state: Value<PostsUiState> = _state
-        private val repo = FakePostsApi(Constants.ROOT_SOURCE_URL)
-        private val useCase = PostsUseCase(repo)
+        private val useCase: PostsUseCase = get()
 
         private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
         init {
