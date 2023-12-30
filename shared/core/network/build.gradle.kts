@@ -19,21 +19,17 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "network"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.okhttp)
+            //implementation(libs.ktor.client.darwin)
             implementation(libs.kotlin.serialization)
-            implementation(libs.decompose.core)
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines)
-
-            implementation(project(":shared:core"))
-            implementation(project(":shared:core:network"))
-            implementation(project(":shared:domain"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -42,7 +38,7 @@ kotlin {
 }
 
 android {
-    namespace = "by.wolfcup.fakepostapp"
+    namespace = "by.wolfcup.network"
     compileSdk = 34
     defaultConfig {
         minSdk = 29

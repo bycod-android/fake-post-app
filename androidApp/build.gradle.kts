@@ -45,4 +45,10 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.decompose.core)
+    implementation(libs.decompose.jetpack.ext)
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+
+    implementation(project(":shared:domain"))
 }

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -19,21 +18,17 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "domain"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.serialization)
-            implementation(libs.decompose.core)
-            implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines)
 
-            implementation(project(":shared:core"))
             implementation(project(":shared:core:network"))
-            implementation(project(":shared:domain"))
+            implementation(project(":shared:core"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -42,7 +37,7 @@ kotlin {
 }
 
 android {
-    namespace = "by.wolfcup.fakepostapp"
+    namespace = "by.wolfcup.domain"
     compileSdk = 34
     defaultConfig {
         minSdk = 29

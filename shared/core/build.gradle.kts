@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -19,21 +18,14 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "core"
             isStatic = true
         }
     }
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.serialization)
-            implementation(libs.decompose.core)
-            implementation(libs.koin.core)
-            implementation(libs.kotlinx.coroutines)
-
-            implementation(project(":shared:core"))
-            implementation(project(":shared:core:network"))
-            implementation(project(":shared:domain"))
+            //put your multiplatform dependencies here
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -42,7 +34,7 @@ kotlin {
 }
 
 android {
-    namespace = "by.wolfcup.fakepostapp"
+    namespace = "by.wolfcup.core"
     compileSdk = 34
     defaultConfig {
         minSdk = 29
