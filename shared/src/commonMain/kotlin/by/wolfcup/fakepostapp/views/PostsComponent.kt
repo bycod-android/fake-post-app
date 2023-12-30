@@ -1,11 +1,8 @@
 package by.wolfcup.fakepostapp.views
 
-import by.wolfcup.core.common.Constants
 import by.wolfcup.core.common.Result
 import by.wolfcup.domain.usecase.PostsUseCase
-import by.wolfcup.fakepostapp.di.appModule
 import by.wolfcup.fakepostapp.views.state.PostsUiState
-import by.wolfcup.network.FakePostsApi
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
@@ -17,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.core.Koin
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
