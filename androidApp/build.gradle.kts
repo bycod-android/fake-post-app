@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.decompose.jetpack.ext)
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
+    implementation(libs.coil.compose)
 
-    implementation(project(":shared:domain"))
+    implementation(projects.shared.domain)
 }

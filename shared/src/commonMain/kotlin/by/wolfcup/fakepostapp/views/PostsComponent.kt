@@ -20,9 +20,11 @@ import org.koin.core.component.get
 
 interface Posts {
     val uiState: Value<PostsUiState>
+    fun openPostById(id: Int)
 }
 class PostsComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    private val navigateToPost: (Int) -> Unit,
 ) : Posts, ComponentContext by componentContext {
 
     private val viewModel = instanceKeeper.getOrCreate {
@@ -30,6 +32,10 @@ class PostsComponent(
     }
     override val uiState: Value<PostsUiState>
         get() = viewModel.state
+
+    override fun openPostById(id: Int) {
+        navigateToPost(id)
+    }
 
 
     class PostsViewModel() : InstanceKeeper.Instance, KoinComponent {

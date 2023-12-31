@@ -36,7 +36,10 @@ class RootComponent(
     ): Root.Child {
         return when(config) {
             is ScreenConfig.Posts -> Root.Child.PostsChild(
-                PostsComponent(componentContext = componentContext)
+                PostsComponent(
+                    componentContext = componentContext,
+                    navigateToPost = {  }
+                )
             )
         }
     }

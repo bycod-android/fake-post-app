@@ -18,19 +18,17 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 fun App(root: RootComponent) {
     val childStack by root.childStack.subscribeAsState()
     MaterialTheme {
-        Scaffold(
-            contentWindowInsets = WindowInsets(top = 25.dp, left = 15.dp, right = 15.dp)
-        ) {paddingValues ->
-            Children(
-                stack = childStack,
-                animation = stackAnimation(slide())
-            ) { child ->
-                when(val instance = child.instance) {
-                    is Root.Child.PostsChild -> PostsScreen(
-                        component = instance.component,
-                        paddingValues = paddingValues
-                    )
-                }
+        Children(
+            stack = childStack,
+            animation = stackAnimation(slide())
+        ) { child ->
+            when(val instance = child.instance) {
+                is Root.Child.PostsChild -> PostsScreen(
+                    component = instance.component,
+                    provideId = {
+                        instance.component.openPostById(it)
+                    }
+                )
             }
         }
     }
