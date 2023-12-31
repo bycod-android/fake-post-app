@@ -28,13 +28,13 @@ import coil.compose.AsyncImage
 fun PostCard(
     modifier: Modifier = Modifier,
     post: Post,
-    onTap: (Int) -> Unit
+    onTap: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onTap(post.id)
+                onTap()
             },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

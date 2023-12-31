@@ -33,7 +33,6 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 @Composable
 fun PostsScreen(
     component: Posts,
-    provideId: (Int) -> Unit
 ) {
     val state = component.uiState.subscribeAsState().value
     Scaffold(
@@ -54,7 +53,7 @@ fun PostsScreen(
             contentPadding = pv,
         ) {
             items(state.data, key = { it.id } ) { post ->
-                PostCard(post = post, onTap = provideId)
+                PostCard(post = post, onTap = { component.openPostById(post.id) })
                 Spacer(modifier = Modifier.height(10.dp))
             }
         }

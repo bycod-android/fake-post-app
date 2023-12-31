@@ -7,17 +7,17 @@ import by.wolfcup.network.remote.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class PostsUseCase (
+class PostUseCase(
     private val repo: Repository
 ) {
-    operator fun invoke(): Flow<Result<List<Post>>> = flow {
+    operator fun invoke(id: Int): Flow<Result<Post>> = flow {
+        println("Provide new id: $id")
         emit(Result.Loading())
         try {
-            val posts = repo.getAllPosts().map { it.toPost() }
-            emit(Result.Successful(posts))
-        } catch (e: Error) {
-            emit(Result.Failure(e.message ?: "error msg"))
+            val post = repo.getPost(id).toPost()
+            emit(Result.Successful(post))
+        } catch (e: Exception) {
+            emit(Result.Failure(e.message ?: "Fatal error"))
         }
-
     }
 }
